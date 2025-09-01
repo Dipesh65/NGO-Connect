@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('address');
-            $table->enum('role',[0,1,2])->default('people'); // user, NGO, and Admin
+            $table->enum('role',[0,1,2])->default(2); // Admin, NGO, People
             $table->string('picture_path_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
