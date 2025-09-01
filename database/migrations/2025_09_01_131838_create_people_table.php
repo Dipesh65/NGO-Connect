@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ngos', function (Blueprint $table) {
+        Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
-            $table->string('registration_number');
-            $table->date('founded_date');
-            $table->string('mission');
-            $table->string('website')->nullable();
-            $table->string('category');
-            $table->string('coverimage_path_name')->nullable();
+            $table->date('date_of_birth');
+            $table->enum('gender',[0,1,2]);
+            $table->text('bio');
+            $table->string('skills')->nullable;
+            $table->string('interested_category');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ngos');
+        Schema::dropIfExists('people');
     }
 };

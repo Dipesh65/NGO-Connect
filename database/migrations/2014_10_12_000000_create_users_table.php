@@ -19,13 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('address');
-            // $table->string('picture_path_name')->nullable();
-            // $table->enum('role',[0,1,2]);
-            $table->enum('role',[0,1]); // user and NGO
-            // $table->dateTime()
-            $table->enum('gender',[0,1,2]);
-            $table->string('bio');
-            $table->string('skills')->nullable;
+            $table->enum('role',[0,1,2])->default('people'); // user, NGO, and Admin
+            $table->string('picture_path_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

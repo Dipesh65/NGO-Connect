@@ -24,9 +24,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'role',
-        'gender',
-        'bio',
-        'skills'
+        'picture_path_name'
     ];
 
     /**
@@ -48,4 +46,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relationships
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
+    public function ngo()
+    {
+        return $this->hasOne(NGO::class);
+    }
 }
