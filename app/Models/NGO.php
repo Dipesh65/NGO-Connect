@@ -16,4 +16,8 @@ class NGO extends Model
         'website',
         'category'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

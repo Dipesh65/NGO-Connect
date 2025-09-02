@@ -36,28 +36,36 @@ class RegisteredUserController extends Controller
             'phone' => ['required','string'],
             'address' => ['required','string'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'birthDate' => ['required','date'],
-            'gender' => ['required','in:0,1,2'],
-            'bio'=>['required','string'],
-            'skills'=>['string'],
+            'role' => ['required','integer','in:0,1,2'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->name,   
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address,
-            'gender' => $request->gender,
-            'bio' => $request->bio,
-            'skills' => $request->skills,
-        
+            'role' => $request->role
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return $this->redirectUserBasedOnRole($user);
     }
+
+    protected function redirectUserBasedOnRole(User $user):RedirectResponse{
+        switch($user->role){
+            case 0:
+                return redirect()->route('admin.dashboard');
+
+            case 1:
+                return redirect()->route('ngo.dashboard');
+
+            default:
+                return redirect()->route('people.dashboard');
+
+    }
+}
 }
