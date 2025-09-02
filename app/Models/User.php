@@ -48,9 +48,9 @@ class User extends Authenticatable
     ];
 
     // Relationships
-    public function person()
+    public function people()
     {
-        return $this->hasOne(Person::class);
+        return $this->hasOne(People::class);
     }
 
     public function ngo()

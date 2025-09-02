@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\NgoHasPost;
 use App\Models\Post;
+use App\Models\PostHasMedia;
 use App\Models\PostMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,7 @@ class NgoController extends Controller
         
         DB::transaction(function() use ($request){
         // Create new post
-        $post = Post::create([
+        $post = NgoHasPost::create([
             'description' => $request->description,
             'type' => $request->type,
             'user_id' => auth()->id()
@@ -38,7 +40,7 @@ class NgoController extends Controller
 
                 $type = str_contains($mediaType, 'video') ? 'video' : 'image';
 
-                PostMedia::create([
+                PostHasMedia::create([
                     'media_type' => $type,
                     'media_path_name' => $path,
                     'post_id' => $post->id,

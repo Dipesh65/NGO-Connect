@@ -5,27 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class NgoHasPost extends Model
 {
     use HasFactory;
 
     protected $fillable = ['description','type','impressions','user_id'];
 
 public function medias(){
-    return $this->hasMany(PostMedia::class);
+    return $this->hasMany(PostHasMedia::class,'post_id');
 }
 
 public function likes(){
-    return $this->hasMany(Like::class);
+    return $this->hasMany(PostHasLike::class,'post_id');
 }
 
 public function comments(){
-    return $this->hasMany(Comments::class)->whereNull('parent_id');
+    return $this->hasMany(PostHasComment::class,'post_id')->whereNull('parent_id');
 }
 
 public function user(){
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class,'user_id');
 }
-
-// user function may also be needed to directly access the user related data such as name, phone, address, etc.
 }

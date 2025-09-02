@@ -63,9 +63,11 @@ class RegisteredUserController extends Controller
             case 1:
                 return redirect()->route('ngo.dashboard');
 
-            default:
+            case 2:
                 return redirect()->route('people.dashboard');
-
+            
+            default:
+                abort(404); // show 404 error message if an unknown role is sent
     }
 }
 }
